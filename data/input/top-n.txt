@@ -1,0 +1,15 @@
+zhangsan,math:95,chinese:90,english:88
+lisi,math:72,chinese:72,english:67
+wangwu,math:84,chinese:83,english:62
+xiaoming,math:97,chinese:72,english:71
+sufei,math:78,chinese:94,english:67
+tengzijing,math:61,chinese:83,english:71
+fanxian,math:84,chinese:86,english:72
+suze,math:88,chinese:75,english:81
+sushi,math:92,chinese:86,english:86
+qingdi,math:98,chinese:79,english:73
+sigujian,math:83,chinese:91,english:64
+shuirouqing,math:91,chinese:89,english:91
+shanhe,math:98,chinese:75,english:67
+liyuanba,math:85,chinese:61,english:69
+lishimin,math:63,chinese:84,english:73

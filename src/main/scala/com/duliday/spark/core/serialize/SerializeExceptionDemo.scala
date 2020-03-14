@@ -16,7 +16,7 @@ object SerializeExceptionDemo {
 
     val rdd = sc.parallelize(Array(5, 2, 3, 7))
     val searchUtil = new SearchUtil(4)
-    val match1 = searchUtil.getMatch2(rdd)
+    val match1 = searchUtil.getMatch1(rdd)
     match1.collect().foreach(println)
 
   }
