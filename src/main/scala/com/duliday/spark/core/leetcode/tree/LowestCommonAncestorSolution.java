@@ -80,9 +80,10 @@ public class LowestCommonAncestorSolution {
         /*List<Integer> result = new ArrayList<Integer>();
         inOrder(root, result);
         preOrder(root, result);
-        postOrder(root, result);*/
+        postOrder(root, result);
         System.out.println(lowestCommonAncestor(root, root.getLeft().getLeft(), root.getLeft().getRight()).getValue());
-        System.out.println(lowestCommonAncestorOfBinarySearchTree(root, root.getLeft().getLeft(), root.getLeft().getRight()).getValue());
+        System.out.println(lowestCommonAncestorOfBinarySearchTree(root, root.getLeft().getLeft(), root.getLeft().getRight()).getValue());*/
+        System.out.println(treeDepth(root));
     }
 
 
@@ -132,6 +133,24 @@ public class LowestCommonAncestorSolution {
         postOrder(root.getLeft(), result);
         postOrder(root.getRight(), result);
         System.out.println(root.getValue());
+    }
+
+    /**
+     * @param root
+     * @return
+     * 二叉树的深度
+     * 如果一棵树只有一个节点，那么它的深度为1
+     * 如果根节点只有左子树而没有右子树，那么树的深度为左子树的深度+1；同理，如果根节点只有右子树而没有左子树，那么树的深度为右子树的深度+1
+     * 如果根节点既有左子树又有右子树，那么树的深度为左、右子树深度的较大值+1
+     */
+    public static int treeDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int leftDepth = treeDepth(root.getLeft());
+        int rightDepth = treeDepth(root.getRight());
+        return leftDepth > rightDepth ? leftDepth + 1 : rightDepth + 1;
     }
 
 
