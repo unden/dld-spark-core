@@ -2,9 +2,9 @@ package com.duliday.spark.core.leetcode.linkedlist;
 
 public class ListNode {
 
-    private int value;
+    public int value;
 
-    private ListNode next;
+    public ListNode next;
 
     public ListNode(int value, ListNode next) {
         this.value = value;
@@ -25,5 +25,13 @@ public class ListNode {
 
     public void setNext(ListNode next) {
         this.next = next;
+    }
+
+    @Override
+    public String toString() {
+        return "ListNode{" +
+                "value=" + value +
+                ", next=" + next +
+                '}';
     }
 }

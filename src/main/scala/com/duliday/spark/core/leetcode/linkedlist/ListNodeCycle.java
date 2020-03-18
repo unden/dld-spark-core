@@ -1,6 +1,8 @@
 package com.duliday.spark.core.leetcode.linkedlist;
 
-public class ListNodeCycle {
+import java.util.Stack;
+
+public class ListNodeCycle<begi> {
 
     private ListNode head;
     private ListNode tail;
@@ -8,7 +10,8 @@ public class ListNodeCycle {
     /**
      * 构建有环链表:5->3->2->7->1->6->8->9->4->1
      * 环的入口节点为1
-     */ {
+     */
+    {
         ListNode four = new ListNode(4, null);
         ListNode nine = new ListNode(9, four);
         ListNode eight = new ListNode(8, nine);
@@ -34,8 +37,15 @@ public class ListNodeCycle {
         System.out.println(cycle.hasCycle(head));
         cycle.remove(head, tail);
         ListNode reversed = cycle.reverse(cycle.getHead());
-        cycle.iterator(reversed);*/
+        cycle.iterator(reversed);
+        cycle.printListReversingWithRecursion(cycle.head);
+        System.out.println();
+        cycle.printListReversingWithStack(cycle.head);
+        cycle.iterator(cycle.removeNthFromEnd(cycle.head, 11));*/
 
+
+        ListNode middle = cycle.middleNode(cycle.head);
+        System.out.println(middle);
     }
 
     private void iterator(ListNode reverseListNode) {
@@ -45,6 +55,7 @@ public class ListNodeCycle {
         }
     }
 
+    /****************************** <begin> ***********************************/
     /**
      * @param head
      * @return 当链表有环时，假设环外长度为a,环长度为b
@@ -56,6 +67,7 @@ public class ListNodeCycle {
     public ListNode detectCycle(ListNode head) {
         ListNode fast = head;
         ListNode slow = head;
+
 
         while (true) {
             if (fast == null || fast.getNext() == null) {
@@ -76,7 +88,9 @@ public class ListNodeCycle {
         }
         return fast;
     }
+    /****************************** <end> ***********************************/
 
+    /****************************** <begin> ***********************************/
     /**
      * @param head
      * @return 判断链表是否有环，快慢指针法
@@ -97,10 +111,12 @@ public class ListNodeCycle {
             }
         }
     }
+    /****************************** <end> ***********************************/
 
+    /****************************** <begin> ***********************************/
     /**
      * @param head
-     * @param toBeDeleted 删除链表中给点待节点
+     * @param toBeDeleted 删除链表中给点的节点
      */
     public void remove(ListNode head, ListNode toBeDeleted) {
         if (toBeDeleted == null || head == null) {
@@ -137,7 +153,9 @@ public class ListNodeCycle {
         pHead.setNext(null);
         toBeDeleted = null;
     }
+    /****************************** <end> ***********************************/
 
+    /****************************** <begin> ***********************************/
     /**
      * @param head
      * @return
@@ -156,6 +174,172 @@ public class ListNodeCycle {
 
         return pre;
     }
+    /****************************** <end> ***********************************/
 
 
+    /****************************** <begin> ***********************************/
+    /**
+     * 删除链表倒数第N个节点
+     */
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if (head == null || n < 1) {
+            return head;
+        }
+
+        // 使用傀儡节点的目的，是当要删除当节点就是head时，保证代码逻辑正确
+        ListNode puppet = new ListNode(0, head);
+        ListNode detector = puppet;
+        ListNode front = puppet;
+        ListNode back = puppet;
+
+        for (int i = 0; i < n; i++) {
+            if (detector.getNext() == null) {
+                throw new RuntimeException("invalid input n: " + n);
+            }
+            detector = detector.getNext();
+        }
+
+        for (int i = 0; i <= n; i++) {
+            front = front.getNext();
+        }
+
+        while (front != null) {
+            front = front.getNext();
+            back = back.getNext();
+        }
+
+        back.setNext(back.getNext().getNext());
+        return puppet.getNext();
+    }
+
+    /****************************** <begin> ***********************************/
+    /**
+     * 链表的中间节点
+     */
+    public ListNode middleNode(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        ListNode front = head;
+        ListNode back = head;
+        while (true) {
+            if (front == null || front.next == null) {
+                return back;
+            }
+
+            front = front.next.next;
+            back = back.next;
+        }
+    }
+    /****************************** <end> ***********************************/
+
+    /****************************** <begin> ***********************************/
+    /**
+     * 题目表述：倒序打印链表
+     * @param head
+     */
+    // 采用栈
+    public void printListReversingWithStack(ListNode head) {
+        Stack<ListNode> stack = new Stack<ListNode>();
+        while (head != null) {
+            stack.push(head);
+            head = head.getNext();
+        }
+
+        while (!stack.empty()) {
+            ListNode top = stack.pop();
+            System.out.print(top.getValue());
+        }
+    }
+
+    // 采用递归
+    public void printListReversingWithRecursion(ListNode head) {
+        if (head == null) {
+            return;
+        }
+        printListReversingWithRecursion(head.getNext());
+        System.out.print(head.getValue());
+    }
+    /****************************** <end> ***********************************/
+
+
+    /****************************** <begin> ***********************************/
+    /**
+     * 删除有序链表中重复的节点
+     */
+    public ListNode deleteDuplication(ListNode head) {
+        ListNode pre = null;
+        ListNode current = head;
+        while (current != null) {
+            if (current.getNext() != null && current.getNext().getValue() == current.getValue()) {
+                while (current.getNext() != null && current.getNext().getValue() == current.getValue()) {
+                    current = current.getNext();
+                }
+                current = current.getNext();
+                if (pre == null) {
+                    head = current;
+                } else {
+                    pre.setNext(current);
+                }
+            } else {
+                pre = current;
+                current = current.getNext();
+            }
+
+        }
+
+        return head;
+    }
+    /****************************** <end> ***********************************/
+
+    /****************************** <begin> ***********************************/
+    /**
+     * 找到两个单链表相交的起始节点
+     * @param headA
+     * @param headB
+     * @return
+     *         ListNode three = new ListNode(3, null);
+     *         ListNode two = new ListNode(2, three);
+     *         ListNode one = new ListNode(1, two);
+     *
+     *         ListNode six = new ListNode(6, null);
+     *         ListNode five = new ListNode(5, six);
+     *         ListNode four = new ListNode(4, five);
+     */
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) {
+            return null;
+        }
+        ListNode p = headA, q = headB;
+        while (p != q) {
+            p = p == null ? headB : p.getNext();
+            q = q == null ? headA : q.getNext();
+        }
+        return p;
+    }
+    /****************************** <end> ***********************************/
+
+
+    /****************************** <begin> ***********************************/
+    /**
+     * 合并两个有序链表
+     */
+    public ListNode mergeTwoSortedLists(ListNode l1, ListNode l2) {
+        if (l1 == null) {
+            return l2;
+        }
+
+        if (l2 == null) {
+            return l1;
+        }
+
+        if (l1.value < l2.value) {
+            l1.next = mergeTwoSortedLists(l1.next, l2);
+            return l1;
+        } else {
+            l2.next = mergeTwoSortedLists(l1, l2.next);
+            return l2;
+        }
+    }
 }
