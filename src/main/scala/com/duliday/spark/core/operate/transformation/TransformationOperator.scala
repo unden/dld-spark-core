@@ -26,7 +26,7 @@ object TransformationOperator {
     //    mapPartitionsDemo(sc)
 
     // mapPartitionsWithIndex,关注点在分区号
-    //    mapPartitionsWithIndexDemo(sc)
+        mapPartitionsWithIndexDemo(sc)
 
     // flatMap:扁平化处理
     //    flatMapDemo(sc)
@@ -47,7 +47,7 @@ object TransformationOperator {
     //    distinctByDemo(sc)
 
     // coalesce:减少分区数(实际上是合并分区，无Shuffle)
-        coalesceByDemo(sc)
+//        coalesceByDemo(sc)
 
     // repartition
     //    repartitionByDemo(sc)
@@ -99,10 +99,10 @@ object TransformationOperator {
 //        joinDemo(sc)
 
     // leftOuterJoin
-    leftOuterJoinDemo(sc)
+//    leftOuterJoinDemo(sc)
 
     // coGroup:返回的是value的集合
-    cogroupDemo(sc)
+//    cogroupDemo(sc)
 
   }
 
