@@ -72,6 +72,7 @@ public class LowestCommonAncestorSolution {
         }
         return root;
     }
+
     /*********************************************************************************************/
 
     public static void main(String[] args) {
@@ -156,6 +157,7 @@ public class LowestCommonAncestorSolution {
      * 给定一棵二叉树和其中的一个结点，如何找出中序遍历顺序的下一个结点？
      * 树中的结点除了有两个分别指向左右子结点的指针以外，还有一个指向父结点的指针。
      * 剑指Offer：7
+     *
      * @return
      */
     public TreeNodeWithParentCursor nextNodeInBinaryTree(TreeNodeWithParentCursor target) {
@@ -184,4 +186,32 @@ public class LowestCommonAncestorSolution {
     }
 
     /*********************************************************************************************/
+
+
+    /****************************** <begin> ***********************************/
+    /**
+     * 判断是否为平衡二叉树
+     */
+    public boolean IsBalancedTree(TreeNode root) {
+        return computeDepth(root) != -1;
+    }
+
+    public int computeDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int left = computeDepth(root.left);
+        if (left == -1) {
+            return -1;
+        }
+
+        int right = computeDepth(root.right);
+        if (right == -1) {
+            return -1;
+        }
+
+        return Math.abs(left - right) < 2 ? Math.max(left, right) + 1 : -1;
+    }
+    /****************************** <end> ***********************************/
 }
