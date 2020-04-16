@@ -1,5 +1,7 @@
 package com.duliday.spark.core.leetcode.tree;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class LowestCommonAncestorSolution {
@@ -18,7 +20,7 @@ public class LowestCommonAncestorSolution {
         root = new TreeNode(4, two, six);
     }
 
-    /*********************************************************************************************/
+    /****************************** <begin> ***********************************/
     /**
      * @param root
      * @param p
@@ -73,7 +75,7 @@ public class LowestCommonAncestorSolution {
         return root;
     }
 
-    /*********************************************************************************************/
+    /****************************** <end> ***********************************/
 
     public static void main(String[] args) {
         /*List<Integer> result = new ArrayList<Integer>();
@@ -85,7 +87,7 @@ public class LowestCommonAncestorSolution {
         System.out.println(treeDepth(root));
     }
 
-    /*********************************************************************************************/
+    /****************************** <begin> ***********************************/
     /**
      * @param root
      * @param result 中序遍历
@@ -130,7 +132,59 @@ public class LowestCommonAncestorSolution {
         postOrder(root.getRight(), result);
         System.out.println(root.getValue());
     }
-    /*********************************************************************************************/
+    /****************************** <end> ***********************************/
+
+    /****************************** <begin> ***********************************/
+    /**
+     * 不分行从上往下打印二叉树
+     * @param root
+     */
+    public void levelOrder(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+
+        LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.add(root);
+        TreeNode node = null;
+        while (!queue.isEmpty()) {
+            node = queue.poll();
+            System.out.print(node.value + " ");
+            if (node.left != null)
+                queue.add(node.left);
+            if (node.right != null)
+                queue.add(node.right);
+        }
+        System.out.println();
+    }
+
+
+    List<List<Integer>> levels = new ArrayList<List<Integer>>();
+
+    public void helper(TreeNode node, int level) {
+        // start the current level
+        if (levels.size() == level)
+            levels.add(new ArrayList<Integer>());
+
+        // fulfil the current level
+        levels.get(level).add(node.value);
+
+        // process child nodes for the next level
+        if (node.left != null)
+            helper(node.left, level + 1);
+        if (node.right != null)
+            helper(node.right, level + 1);
+    }
+
+    public List<List<Integer>> levelOrder2(TreeNode root) {
+        if (root == null) return levels;
+        helper(root, 0);
+        return levels;
+    }
+
+
+
+    /****************************** <end> ***********************************/
 
     /****************************** <begin> ***********************************/
     /**
@@ -152,7 +206,7 @@ public class LowestCommonAncestorSolution {
     /****************************** <end> ***********************************/
 
 
-    /*********************************************************************************************/
+    /****************************** <begin> ***********************************/
     /**
      * 给定一棵二叉树和其中的一个结点，如何找出中序遍历顺序的下一个结点？
      * 树中的结点除了有两个分别指向左右子结点的指针以外，还有一个指向父结点的指针。
@@ -185,7 +239,7 @@ public class LowestCommonAncestorSolution {
         return null;
     }
 
-    /*********************************************************************************************/
+    /****************************** <end> ***********************************/
 
 
     /****************************** <begin> ***********************************/
@@ -214,4 +268,7 @@ public class LowestCommonAncestorSolution {
         return Math.abs(left - right) < 2 ? Math.max(left, right) + 1 : -1;
     }
     /****************************** <end> ***********************************/
+
+
+
 }
