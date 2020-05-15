@@ -246,7 +246,7 @@ public class LowestCommonAncestorSolution {
     /**
      * 判断是否为平衡二叉树
      */
-    public boolean IsBalancedTree(TreeNode root) {
+    public boolean isBalancedTree(TreeNode root) {
         return computeDepth(root) != -1;
     }
 
@@ -269,6 +269,25 @@ public class LowestCommonAncestorSolution {
     }
     /****************************** <end> ***********************************/
 
+    /****************************** <begin> ***********************************/
+    /**
+     * 路径总和
+     * @param root
+     * @param sum
+     * @return
+     */
+    public boolean hasPathSum(TreeNode root, int sum) {
+        if (root == null) {
+            return false;
+        }
 
+        sum -= root.value;
+        if ((root.left == null) && (root.right == null)) {
+            return (sum == 0);
+        }
+
+        return hasPathSum(root.left, sum) || hasPathSum(root.right, sum);
+    }
+    /****************************** <end> ***********************************/
 
 }

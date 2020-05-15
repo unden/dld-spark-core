@@ -1,7 +1,7 @@
-package com.duliday.spark.core
-
+package com.duliday.spark.core.syntax
 
 import com.duliday.spark.core.util.{DateUtil, IdentityCardValidate}
+import org.junit.Test
 
 import scala.collection.mutable.ArrayBuffer
 import scala.io.Source
@@ -74,5 +74,3 @@ object FileOperate {
   }
 
 }
-
-
